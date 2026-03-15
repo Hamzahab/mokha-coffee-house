@@ -35,7 +35,7 @@ export default function AboutPage() {
           <Reveal as="blockquote" className="pull-quote rd3">&ldquo;We didn&rsquo;t open a café. We opened our home.&rdquo;</Reveal>
         </div>
         <div className="origin-visual">
-          <Reveal className="origin-glyph">م</Reveal>
+          <Reveal className="origin-glyph">موخا</Reveal>
           <Reveal className="origin-dates rd1">
             <div className="origin-date-row">
               <span className="origin-date">1450</span>

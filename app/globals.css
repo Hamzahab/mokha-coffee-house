@@ -1010,12 +1010,13 @@ footer {
 }
 .origin-glyph {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: 160px;
+  font-size: 100px;
   font-weight: 300;
-  color: rgba(201,169,110,.15);
+  color: rgba(201,169,110,.18);
   line-height: 1;
   user-select: none;
   font-style: italic;
+  letter-spacing: 0.02em;
 }
 .origin-dates {
   display: flex;
