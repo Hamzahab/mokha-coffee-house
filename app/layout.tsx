@@ -1,0 +1,47 @@
+import type { Metadata } from 'next';
+import { Cormorant_Garamond, Cinzel, DM_Sans } from 'next/font/google';
+import './globals.css';
+import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
+import { Cursor } from '@/components/Cursor';
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-cormorant',
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  display: 'swap',
+  variable: '--font-cinzel',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-dm-sans',
+});
+
+export const metadata: Metadata = {
+  title: 'Mokha Coffee House — Edmonton',
+  description: 'Yemeni Coffee House in Edmonton, Alberta. Come as a stranger, leave as family.',
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en" className={`${cormorant.variable} ${cinzel.variable} ${dmSans.variable}`}>
+      <body className="page min-h-screen antialiased">
+        <Cursor />
+        <Nav />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
