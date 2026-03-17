@@ -76,6 +76,11 @@ body::before {
   transition: all .35s cubic-bezier(.23,1,.32,1);
 }
 
+/* Hide custom cursor on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor, .cursor-ring { display: none; }
+}
+
 /* ── NAV ── */
 nav {
   position: fixed;
