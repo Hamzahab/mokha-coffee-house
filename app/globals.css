@@ -158,6 +158,108 @@ nav.scrolled {
 }
 .nav-cta:hover { background: var(--gold2); }
 
+/* ── HAMBURGER (mobile only) ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gold);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── MOBILE MENU OVERLAY ── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 20, 13, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+.mobile-menu-link {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: color 0.25s ease;
+}
+.mobile-menu.open .mobile-menu-link {
+  animation: mobileMenuFadeIn 0.5s ease forwards;
+}
+.mobile-menu-link:hover,
+.mobile-menu-link.active {
+  color: var(--gold);
+}
+.mobile-menu-cta {
+  margin-top: 20px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--b2);
+  background: var(--gold);
+  padding: 14px 32px;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: background 0.25s ease;
+}
+.mobile-menu.open .mobile-menu-cta {
+  animation: mobileMenuFadeIn 0.5s ease forwards;
+}
+.mobile-menu-cta:hover {
+  background: var(--gold2);
+}
+
+@keyframes mobileMenuFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ── PAGE WRAPPER (accounts for fixed nav) ── */
 .page { padding-top: 64px; }
 
@@ -391,10 +493,12 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   nav {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     padding: 0 20px;
+    gap: 16px;
   }
   .nav-left, .nav-right { display: none; }
+  .hamburger { display: flex; }
   section { padding: 80px 24px; }
   footer {
     grid-template-columns: 1fr;
