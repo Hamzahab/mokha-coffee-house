@@ -80,7 +80,7 @@ body::before {
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 200;
+  z-index: 1000;
   height: 64px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
