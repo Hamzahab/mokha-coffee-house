@@ -7,6 +7,9 @@ import { LocationPicker } from './LocationPicker';
 import { ItemGrid } from './ItemGrid';
 import { ItemModal } from './ItemModal';
 import { CartBar } from './CartBar';
+import { SkeletonGrid } from './SkeletonGrid';
+import { SidebarCart } from './SidebarCart';
+import { MapPinIcon, CheckIcon } from './Icons';
 
 interface OrderClientProps {
   categories: CatalogCategory[];
@@ -52,10 +55,7 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
             className="order-location-badge"
             onClick={() => setShowLocationPicker(true)}
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
+            <MapPinIcon size={14} />
             <span>{location.name}</span>
             <span className="order-location-change">Change</span>
           </button>
@@ -66,16 +66,15 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
         <LocationPicker onConfirm={() => setShowLocationPicker(false)} />
       )}
 
-      {loading && (
-        <div className="order-loading">
-          <div className="order-loading-spinner" />
-          <p>Updating menu…</p>
-        </div>
-      )}
-
-      <div style={{ opacity: loading ? 0.4 : 1, transition: 'opacity 0.3s', pointerEvents: loading ? 'none' : 'auto' }}>
-        <ItemGrid categories={categories} onSelectItem={setSelectedItem} />
+      <div className="order-page-menu">
+        {loading ? (
+          <SkeletonGrid />
+        ) : (
+          <ItemGrid categories={categories} onSelectItem={setSelectedItem} />
+        )}
       </div>
+
+      <SidebarCart />
 
       {selectedItem && (
         <ItemModal
@@ -86,9 +85,7 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
       )}
 
       <div className={`order-toast${toast ? ' visible' : ''}`}>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <path d="M20 6 9 17l-5-5" />
-        </svg>
+        <CheckIcon size={16} />
         Added to order
       </div>
 

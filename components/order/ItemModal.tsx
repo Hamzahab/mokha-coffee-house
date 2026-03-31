@@ -1,10 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import type { CatalogMenuItem, CartModifier } from '@/lib/square/types';
-import { formatCents } from '@/lib/square/format';
 import { useCart } from './CartProvider';
+import { useSlidePanel } from './useSlidePanel';
+import { useFormatCurrency } from './useFormatCurrency';
+import { CloseIcon, ChevronDownIcon, CheckSmallIcon } from './Icons';
 
 interface ItemModalProps {
   item: CatalogMenuItem;
@@ -15,7 +17,8 @@ interface ItemModalProps {
 export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
   const { addItem } = useCart();
   const backdropRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const { visible, close: handleClose } = useSlidePanel(onClose);
+  const fmt = useFormatCurrency();
   const [quantity, setQuantity] = useState(1);
   const [selectedVariationId, setSelectedVariationId] = useState<string>(
     item.variations.length === 1 ? item.variations[0].id : '',
@@ -26,20 +29,8 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
   );
   const [addAnim, setAddAnim] = useState(false);
 
-  useEffect(() => {
-    requestAnimationFrame(() => setVisible(true));
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = ''; };
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setVisible(false);
-    setTimeout(onClose, 300);
-  }, [onClose]);
-
   const selectedVariation = item.variations.find((v) => v.id === selectedVariationId);
   const currency = item.variations[0]?.currency ?? 'CAD';
-  const fmt = (cents: number) => formatCents(cents, currency);
 
   const selectedModifiers = useMemo(() => {
     const mods: CartModifier[] = [];
@@ -157,12 +148,12 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
           )}
 
           {isOutOfStock && (
-            <p className="order-item-stock out-of-stock" style={{ marginBottom: 12 }}>
+            <p className="order-item-stock out-of-stock order-stock-badge-mb">
               Out of stock
             </p>
           )}
           {item.stockStatus === 'low_stock' && (
-            <p className="order-item-stock low-stock" style={{ marginBottom: 12 }}>
+            <p className="order-item-stock low-stock order-stock-badge-mb">
               Low stock
             </p>
           )}
@@ -220,12 +211,7 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
                   <span className="order-mod-title">{ml.name}</span>
                   <span className="order-mod-meta">
                     <span>{isRequired ? 'Required' : 'Optional'}</span>
-                    <svg
-                      className={`order-mod-chevron${isExpanded ? ' open' : ''}`}
-                      width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <ChevronDownIcon className={`order-mod-chevron${isExpanded ? ' open' : ''}`} />
                   </span>
                 </button>
                 {isExpanded && (
@@ -250,11 +236,7 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
                               disabled={isDisabled}
                             >
                               <span className="order-mod-checkbox">
-                                {isSelected && (
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3">
-                                    <path d="M20 6 9 17l-5-5" />
-                                  </svg>
-                                )}
+                                {isSelected && <CheckSmallIcon />}
                               </span>
                               <span className="order-mod-option-info">
                                 <span className="order-mod-option-name">{m.name}</span>
@@ -277,9 +259,7 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
         {/* Bottom bar */}
         <div className="order-modal-bottom">
           <button className="order-modal-close-btn" onClick={handleClose} aria-label="Close">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <CloseIcon size={20} />
           </button>
           <button
             className={`order-modal-add-btn${canAdd ? ' enabled' : ''}${addAnim ? ' adding' : ''}`}

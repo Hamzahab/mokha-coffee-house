@@ -30,9 +30,8 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
           <p className="order-item-desc">{item.description}</p>
         )}
       </div>
-      {item.imageUrl ? (
+      {item.imageUrl && (
         <div className="order-item-img-wrap">
-          {item.onSale && <span className="order-sale-badge">Sale</span>}
           <Image
             src={item.imageUrl}
             alt={item.name}
@@ -42,9 +41,7 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
             className="order-item-img"
           />
         </div>
-      ) : item.onSale ? (
-        <span className="order-sale-badge" style={{ position: 'static' }}>Sale</span>
-      ) : null}
+      )}
     </button>
   );
 }

@@ -6,9 +6,11 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useState,
   type ReactNode,
 } from 'react';
 import type { CartItem, StoreLocation } from '@/lib/square/types';
+import type { HoursPeriod } from '@/lib/square/schedule';
 
 // ---------------------------------------------------------------------------
 // State
@@ -41,6 +43,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         ),
       };
     case 'SET_LOCATION':
+      if (state.location && state.location.id !== action.location.id) {
+        return { ...state, location: action.location, items: [] };
+      }
       return { ...state, location: action.location };
     case 'CLEAR':
       return { ...state, items: [] };
@@ -68,6 +73,8 @@ interface CartContextValue {
   updateQty: (id: string, quantity: number) => void;
   setLocation: (location: StoreLocation) => void;
   clear: () => void;
+  hoursPeriods: HoursPeriod[];
+  hoursLoading: boolean;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -84,8 +91,10 @@ export function useCart(): CartContextValue {
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  const [hydrated, setHydrated] = useState(false);
+  const [hoursPeriods, setHoursPeriods] = useState<HoursPeriod[]>([]);
+  const [hoursLoading, setHoursLoading] = useState(false);
 
-  // Hydrate from localStorage on mount
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -96,16 +105,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
     } catch {
       // ignore corrupt storage
     }
+    setHydrated(true);
   }, []);
 
-  // Persist to localStorage on every change
   useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
       // ignore quota errors
     }
-  }, [state]);
+  }, [state, hydrated]);
+
+  useEffect(() => {
+    if (!state.location) return;
+    setHoursLoading(true);
+    setHoursPeriods([]);
+    fetch(`/api/square/hours?locationId=${encodeURIComponent(state.location.id)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.periods) setHoursPeriods(data.periods);
+      })
+      .catch(() => {})
+      .finally(() => setHoursLoading(false));
+  }, [state.location?.id]);
 
   const addItem = useCallback((item: CartItem) => {
     dispatch({ type: 'ADD_ITEM', item });
@@ -149,6 +172,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateQty,
         setLocation,
         clear,
+        hoursPeriods,
+        hoursLoading,
       }}
     >
       {children}

@@ -38,7 +38,6 @@ export function FeaturedCarousel({ items, onSelectItem }: FeaturedCarouselProps)
               <div className="featured-card-img-placeholder" />
             )}
             <div className="featured-card-gradient" />
-            {item.onSale && <span className="featured-sale-badge">Sale</span>}
             <div className="featured-card-info">
               <p className="featured-card-name">{item.name}</p>
               <p className="featured-card-price">{formatItemPriceFrom(item)}</p>

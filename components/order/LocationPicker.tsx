@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { StoreLocation } from '@/lib/square/types';
 import { useCart } from './CartProvider';
+import { MapPinIcon } from './Icons';
 
 const LOCATIONS: StoreLocation[] = [
   {
@@ -67,10 +68,7 @@ export function LocationPicker({ onConfirm }: LocationPickerProps) {
           <>
             <h2 className="order-loc-heading">Select location</h2>
             <div className="order-loc-find">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
+              <MapPinIcon size={14} />
               <span>Find the nearest store</span>
             </div>
 
@@ -105,7 +103,7 @@ export function LocationPicker({ onConfirm }: LocationPickerProps) {
             </button>
           </>
         ) : (
-          <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--cream-dim)', fontSize: 15 }}>
+          <div className="order-loc-coming-soon">
             {activeTab === 'delivery' ? 'Delivery' : 'Shipping'} coming soon.
           </div>
         )}

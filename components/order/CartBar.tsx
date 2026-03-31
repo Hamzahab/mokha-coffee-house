@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from './CartProvider';
-import { formatCents } from '@/lib/square/format';
+import { useFormatCurrency } from './useFormatCurrency';
 import { CartView } from './CartView';
 
 interface CartBarProps {
@@ -10,13 +10,11 @@ interface CartBarProps {
 }
 
 export function CartBar({ pulse }: CartBarProps) {
-  const { itemCount, subtotalCents, items } = useCart();
+  const { itemCount, subtotalCents } = useCart();
   const [cartOpen, setCartOpen] = useState(false);
+  const fmt = useFormatCurrency();
 
   if (itemCount === 0) return null;
-
-  const currency = items[0]?.currency ?? 'CAD';
-  const fmt = (cents: number) => formatCents(cents, currency);
 
   return (
     <>
