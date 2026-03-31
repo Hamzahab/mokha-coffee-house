@@ -50,7 +50,7 @@ export function Nav() {
         <div className="nav-right">
           <Link href="/locations" className={pathname === '/locations' ? 'active' : ''}>Locations</Link>
           <Link href="/contact" className={pathname === '/contact' ? 'active' : ''}>Contact</Link>
-          <Link href="/order" className="nav-cta">Order Now</Link>
+          <Link href="/menu" className="nav-cta">Order Now</Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -81,7 +81,7 @@ export function Nav() {
             </Link>
           ))}
           <Link
-            href="/order"
+            href="/menu"
             className="mobile-menu-cta"
             style={{ animationDelay: '0.4s' }}
             onClick={() => setMenuOpen(false)}

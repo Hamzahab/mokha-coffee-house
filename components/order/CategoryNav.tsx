@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { SearchIcon, CloseIcon } from './Icons';
 
 interface CategoryNavProps {
   categories: { id: string; name: string }[];
@@ -36,7 +37,7 @@ export function CategoryNav({ categories, onSearch }: CategoryNavProps) {
           }
         }
       },
-      { rootMargin: '-56px 0px -50% 0px', threshold: 0 },
+      { rootMargin: '-120px 0px -50% 0px', threshold: 0 },
     );
 
     for (const cat of categories) {
@@ -62,7 +63,7 @@ export function CategoryNav({ categories, onSearch }: CategoryNavProps) {
 
     const el = document.getElementById(id);
     if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 120;
+      const top = el.getBoundingClientRect().top + window.scrollY - 130;
       window.scrollTo({ top, behavior: 'smooth' });
     }
 
@@ -86,10 +87,7 @@ export function CategoryNav({ categories, onSearch }: CategoryNavProps) {
     <div className="order-cat-nav">
       {searchOpen ? (
         <div className="order-search-bar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
-          </svg>
+          <SearchIcon />
           <input
             type="text"
             placeholder="Search menu..."
@@ -99,9 +97,7 @@ export function CategoryNav({ categories, onSearch }: CategoryNavProps) {
             className="order-search-input"
           />
           <button onClick={closeSearch} className="order-search-close" aria-label="Close search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <CloseIcon size={18} />
           </button>
         </div>
       ) : (
@@ -111,10 +107,7 @@ export function CategoryNav({ categories, onSearch }: CategoryNavProps) {
             onClick={() => setSearchOpen(true)}
             aria-label="Search menu"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
-            </svg>
+            <SearchIcon />
           </button>
           <div className="order-cat-pills" ref={scrollRef}>
             {categories.map((cat) => (

@@ -76,7 +76,8 @@ export interface OrderPayload {
   locationId: string;
   lineItems: OrderLineItem[];
   customerName: string;
-  customerPhone?: string;
+  customerPhone: string;
+  customerEmail: string;
   pickupAt?: string; // ISO 8601
 }
 

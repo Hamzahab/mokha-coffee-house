@@ -1,5 +1,6 @@
 import { fetchCatalog } from '@/lib/square/catalog';
 import { OrderClient } from '@/components/order/OrderClient';
+import { OrderErrorBoundary } from '@/components/order/OrderErrorBoundary';
 
 export const revalidate = 60;
 
@@ -26,7 +27,9 @@ export default async function OrderPage() {
           </div>
         </>
       ) : (
-        <OrderClient categories={categories} />
+        <OrderErrorBoundary>
+          <OrderClient categories={categories} />
+        </OrderErrorBoundary>
       )}
     </div>
   );
