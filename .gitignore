@@ -6,3 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 out
+
+# env files (contain secrets)
+.env.local
+.env*.local
+
+# build artifacts
+tsconfig.tsbuildinfo
