@@ -8,7 +8,6 @@ import { ItemGrid } from './ItemGrid';
 import { ItemModal } from './ItemModal';
 import { CartBar } from './CartBar';
 import { SkeletonGrid } from './SkeletonGrid';
-import { SidebarCart } from './SidebarCart';
 import { MapPinIcon, CheckIcon } from './Icons';
 
 interface OrderClientProps {
@@ -73,8 +72,6 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
           <ItemGrid categories={categories} onSelectItem={setSelectedItem} />
         )}
       </div>
-
-      <SidebarCart />
 
       {selectedItem && (
         <ItemModal

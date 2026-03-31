@@ -10,11 +10,11 @@ interface CartBarProps {
 }
 
 export function CartBar({ pulse }: CartBarProps) {
-  const { itemCount, subtotalCents } = useCart();
+  const { itemCount, subtotalCents, location } = useCart();
   const [cartOpen, setCartOpen] = useState(false);
   const fmt = useFormatCurrency();
 
-  if (itemCount === 0) return null;
+  if (itemCount === 0 || !location) return null;
 
   return (
     <>
