@@ -35,14 +35,14 @@ export default function HomePage() {
         <div className="marquee-track">
           {(['a', 'b'] as const).flatMap((set) =>
             [
-              'Est. 15th Century · Port of Mocha',
-              'الزيارة · The Art of Ziara',
               'Single Origin · In-House Roasted',
-              'Yemeni Heritage',
+              'الزيارة · Ziara',
+              'Specialty Coffee',
               'Edmonton, Alberta',
               'Handcrafted With Intention',
-              'Come as a Stranger, Leave as Family',
               'From Bean to Cup',
+              'Two Locations · One Family',
+              'Brewed to Gather',
             ].map((text, i) => (
               <div key={`${set}${i}`} className="marquee-item" aria-hidden={set === 'b' || undefined}>
                 {text}<span className="marquee-dot" />
