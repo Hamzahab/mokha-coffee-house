@@ -33,10 +33,22 @@ export default function HomePage() {
       {/* MARQUEE */}
       <div className="marquee-strip">
         <div className="marquee-track">
-          {['Specialty Coffee', 'Port of Mocha · Yemen', 'Single Origin Beans', 'الزيارة · Ziara', 'Edmonton, Alberta', 'In-House Roasting', '90 Min Average Stay'].flatMap((text, i) => [
-            <div key={`a${i}`} className="marquee-item">{text}<span className="marquee-dot" /></div>,
-            <div key={`b${i}`} className="marquee-item">{text}<span className="marquee-dot" /></div>,
-          ])}
+          {(['a', 'b'] as const).flatMap((set) =>
+            [
+              'Est. 15th Century · Port of Mocha',
+              'الزيارة · The Art of Ziara',
+              'Single Origin · In-House Roasted',
+              'Yemeni Heritage',
+              'Edmonton, Alberta',
+              'Handcrafted With Intention',
+              'Come as a Stranger, Leave as Family',
+              'From Bean to Cup',
+            ].map((text, i) => (
+              <div key={`${set}${i}`} className="marquee-item" aria-hidden={set === 'b' || undefined}>
+                {text}<span className="marquee-dot" />
+              </div>
+            )),
+          )}
         </div>
       </div>
 
