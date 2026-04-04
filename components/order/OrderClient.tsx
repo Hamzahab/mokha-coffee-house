@@ -47,15 +47,14 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
   return (
     <>
       <header className="order-header">
-        <p className="order-eyebrow">Order Online</p>
-        <h1 className="order-title">Place your <em>order</em></h1>
+        <h1 className="order-title">From our hands <em>to yours</em></h1>
         {location && (
           <button
             className="order-location-badge"
             onClick={() => setShowLocationPicker(true)}
           >
             <MapPinIcon size={14} />
-            <span>{location.name}</span>
+            <span>Pickup from {location.name}</span>
             <span className="order-location-change">Change</span>
           </button>
         )}

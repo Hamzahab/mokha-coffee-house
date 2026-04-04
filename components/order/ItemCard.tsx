@@ -40,6 +40,8 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
             width={280}
             height={280}
             sizes="(max-width: 600px) 120px, 140px"
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZThlMGQyIi8+PC9zdmc+"
             className="order-item-img"
           />
           <span className="order-item-add-icon" aria-hidden="true">+</span>

@@ -28,6 +28,7 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
     () => new Set(item.modifierLists.filter((ml) => ml.minSelected > 0).map((ml) => ml.id)),
   );
   const [addAnim, setAddAnim] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   const selectedVariation = item.variations.find((v) => v.id === selectedVariationId);
   const currency = item.variations[0]?.currency ?? 'CAD';
@@ -123,8 +124,9 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
           <CloseIcon size={20} />
         </button>
 
-        {item.imageUrl ? (
+        {item.imageUrl && (
           <div className="order-modal-img-wrap">
+            {!imgLoaded && <div className="order-modal-img-skeleton" />}
             <Image
               src={item.imageUrl}
               alt={item.name}
@@ -132,11 +134,10 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
               height={440}
               sizes="(max-width: 768px) 100vw, 520px"
               priority
-              className="order-modal-img"
+              onLoad={() => setImgLoaded(true)}
+              className={`order-modal-img${imgLoaded ? ' loaded' : ''}`}
             />
           </div>
-        ) : (
-          <div className="order-modal-img-placeholder" />
         )}
 
         <div className="order-modal-content">

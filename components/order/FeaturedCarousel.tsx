@@ -32,6 +32,8 @@ export function FeaturedCarousel({ items, onSelectItem }: FeaturedCarouselProps)
                 height={360}
                 sizes="(max-width: 600px) 70vw, 260px"
                 priority={i < 4}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIwIiBoZWlnaHQ9IjM2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZThlMGQyIi8+PC9zdmc+"
                 className="featured-card-img"
               />
             ) : (

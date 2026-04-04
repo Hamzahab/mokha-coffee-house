@@ -76,7 +76,7 @@ export function PickupScheduler({
                 className={`order-schedule-opt${scheduleMode === 'schedule' ? ' selected' : ''}`}
                 onClick={() => onScheduleModeChange('schedule')}
               >
-                Schedule
+                Schedule for later
               </button>
             </div>
 

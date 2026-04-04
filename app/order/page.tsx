@@ -19,8 +19,7 @@ export default async function OrderPage() {
       {categories.length === 0 ? (
         <>
           <header className="order-header">
-            <p className="order-eyebrow">Order Online</p>
-            <h1 className="order-title">Place your <em>order</em></h1>
+            <h1 className="order-title">From our hands <em>to yours</em></h1>
           </header>
           <div className="order-empty-state">
             <p>Menu is currently unavailable. Please try again later.</p>
