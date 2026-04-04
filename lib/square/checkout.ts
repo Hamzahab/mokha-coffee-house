@@ -35,6 +35,7 @@ export async function createCheckout(payload: OrderPayload) {
           type: 'PICKUP',
           pickupDetails: {
             scheduleType: isScheduled ? 'SCHEDULED' : 'ASAP',
+            ...(!isScheduled && { prepTimeDuration: 'PT15M' }),
             ...(isScheduled && { pickupAt: payload.pickupAt }),
             recipient: {
               displayName: payload.customerName,

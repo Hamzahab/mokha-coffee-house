@@ -19,27 +19,30 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
     >
       <div className="order-item-info">
         <p className="order-item-name">{item.name}</p>
-        <p className="order-item-price">{formatItemPrice(item)}</p>
-        {item.stockStatus === 'low_stock' && (
-          <p className="order-item-stock low-stock">Low stock</p>
-        )}
-        {isOutOfStock && (
-          <p className="order-item-stock out-of-stock">Out of stock</p>
-        )}
         {item.description && (
           <p className="order-item-desc">{item.description}</p>
         )}
+        <div className="order-item-meta">
+          <p className="order-item-price">{formatItemPrice(item)}</p>
+          {item.stockStatus === 'low_stock' && (
+            <span className="order-item-stock low-stock">Low stock</span>
+          )}
+          {isOutOfStock && (
+            <span className="order-item-stock out-of-stock">Out of stock</span>
+          )}
+        </div>
       </div>
       {item.imageUrl && (
         <div className="order-item-img-wrap">
           <Image
             src={item.imageUrl}
             alt={item.name}
-            width={192}
-            height={192}
-            sizes="96px"
+            width={280}
+            height={280}
+            sizes="(max-width: 600px) 120px, 140px"
             className="order-item-img"
           />
+          <span className="order-item-add-icon" aria-hidden="true">+</span>
         </div>
       )}
     </button>

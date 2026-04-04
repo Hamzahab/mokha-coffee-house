@@ -119,6 +119,10 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
       onClick={(e) => { if (e.target === backdropRef.current) handleClose(); }}
     >
       <div className={`order-modal-sheet${visible ? ' visible' : ''}`}>
+        <button className="order-modal-close-btn" onClick={handleClose} aria-label="Close">
+          <CloseIcon size={20} />
+        </button>
+
         {item.imageUrl ? (
           <div className="order-modal-img-wrap">
             <Image
@@ -200,7 +204,10 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
             </div>
           )}
 
-          {/* Modifier groups */}
+          {item.modifierLists.length > 0 && (
+            <h3 className="order-modal-customize-heading">Customize your item</h3>
+          )}
+
           {item.modifierLists.map((ml) => {
             const isExpanded = expandedGroups.has(ml.id);
             const isRequired = ml.minSelected > 0;
@@ -256,11 +263,7 @@ export function ItemModal({ item, onClose, onAdded }: ItemModalProps) {
           })}
         </div>
 
-        {/* Bottom bar */}
         <div className="order-modal-bottom">
-          <button className="order-modal-close-btn" onClick={handleClose} aria-label="Close">
-            <CloseIcon size={20} />
-          </button>
           <button
             className={`order-modal-add-btn${canAdd ? ' enabled' : ''}${addAnim ? ' adding' : ''}`}
             disabled={!canAdd}

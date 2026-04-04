@@ -80,6 +80,10 @@ export function PickupScheduler({
               </button>
             </div>
 
+            {scheduleMode === 'asap' && storeOpen && (
+              <p className="order-pickup-estimate">Pickup in 15-20 min</p>
+            )}
+
             {scheduleMode === 'schedule' && (
               <div className="order-schedule-picker">
                 <div className="order-schedule-days">
