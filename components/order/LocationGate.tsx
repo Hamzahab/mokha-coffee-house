@@ -10,5 +10,5 @@ export function LocationGate() {
 
   if (location || dismissed) return null;
 
-  return <LocationPicker onConfirm={() => setDismissed(true)} />;
+  return <LocationPicker onConfirm={() => setDismissed(true)} immediate />;
 }

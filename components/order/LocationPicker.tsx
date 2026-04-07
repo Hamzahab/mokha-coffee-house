@@ -50,17 +50,19 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
 
 interface LocationPickerProps {
   onConfirm: () => void;
+  immediate?: boolean;
 }
 
-export function LocationPicker({ onConfirm }: LocationPickerProps) {
+export function LocationPicker({ onConfirm, immediate }: LocationPickerProps) {
   const { location, setLocation } = useCart();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(!!immediate);
+  const [skipTransition, setSkipTransition] = useState(!!immediate);
   const [selected, setSelected] = useState<string>(location?.id ?? '');
   const [activeTab, setActiveTab] = useState<'pickup' | 'delivery' | 'shipping'>('pickup');
   const [distances, setDistances] = useState<Record<string, number>>({});
 
   useEffect(() => {
-    requestAnimationFrame(() => setVisible(true));
+    if (!immediate) requestAnimationFrame(() => setVisible(true));
     document.body.style.overflow = 'hidden';
 
     let watchId: number | undefined;
@@ -88,13 +90,14 @@ export function LocationPicker({ onConfirm }: LocationPickerProps) {
     const loc = LOCATIONS.find((l) => l.id === selected);
     if (!loc) return;
     setLocation(loc);
+    setSkipTransition(false);
     setVisible(false);
     setTimeout(onConfirm, 300);
   }, [selected, setLocation, onConfirm]);
 
   return (
-    <div className={`order-loc-backdrop${visible ? ' visible' : ''}`}>
-      <div className={`order-loc-sheet${visible ? ' visible' : ''}`}>
+    <div className={`order-loc-backdrop${visible ? ' visible' : ''}${skipTransition ? ' no-transition' : ''}`}>
+      <div className={`order-loc-sheet${visible ? ' visible' : ''}${skipTransition ? ' no-transition' : ''}`}>
         {/* Tabs */}
         <div className="order-loc-tabs">
           {(['pickup', 'delivery', 'shipping'] as const).map((tab) => (

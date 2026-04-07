@@ -976,6 +976,10 @@
 .order-loc-backdrop.visible {
   background: rgba(0,0,0,0.6);
 }
+.order-loc-backdrop.no-transition,
+.order-loc-sheet.no-transition {
+  transition: none;
+}
 .order-loc-sheet {
   width: 100%;
   max-height: 95vh;
