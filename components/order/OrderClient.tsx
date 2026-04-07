@@ -19,7 +19,7 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
   const [categories, setCategories] = useState(initialCategories);
   const [loading, setLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CatalogMenuItem | null>(null);
-  const [showLocationPicker, setShowLocationPicker] = useState(!location);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [toast, setToast] = useState(false);
 
   useEffect(() => {
