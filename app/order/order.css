@@ -1589,11 +1589,45 @@
 .order-stock-badge-mb {
   margin-bottom: 12px;
 }
-.order-loc-coming-soon {
-  padding: 40px 0;
+.order-loc-redirect {
+  padding: 32px 20px 20px;
   text-align: center;
+}
+.order-loc-redirect-title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.order-loc-redirect-desc {
+  font-size: 14px;
   color: var(--cream-dim);
-  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.order-loc-redirect-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order-loc-redirect-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--b2);
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.order-loc-redirect-btn:hover {
+  opacity: 0.9;
 }
 
 /* ── Micro-interactions ── */

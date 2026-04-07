@@ -29,6 +29,13 @@ const LOCATIONS: LocationWithCoords[] = [
   },
 ];
 
+const SQUARE_ONLINE_URLS: Record<string, string> = {
+  [process.env.NEXT_PUBLIC_LOCATION_ID_CASTLEDOWNS ?? 'castledowns']:
+    'https://mokha-coffee-house-ltd.square.site/s/order?location=LVYX76SPXC68V',
+  [process.env.NEXT_PUBLIC_LOCATION_ID_CURRENTS ?? 'currents']:
+    'https://mokha-coffee-house-ltd.square.site/s/order?location=LF4R3GRSF9ZC6',
+};
+
 function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
   const R = 6371;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -147,8 +154,29 @@ export function LocationPicker({ onConfirm }: LocationPickerProps) {
             </button>
           </>
         ) : (
-          <div className="order-loc-coming-soon">
-            {activeTab === 'delivery' ? 'Delivery' : 'Shipping'} coming soon.
+          <div className="order-loc-redirect">
+            <p className="order-loc-redirect-title">
+              {activeTab === 'delivery' ? 'Delivery' : 'Shipping'} is available through our partner checkout
+            </p>
+            <p className="order-loc-redirect-desc">
+              {activeTab === 'delivery'
+                ? 'Get your order delivered to your door via our Square Online store.'
+                : 'Have items shipped to you via our Square Online store.'}
+            </p>
+            <div className="order-loc-redirect-links">
+              {LOCATIONS.map((loc) => (
+                <a
+                  key={loc.id}
+                  href={SQUARE_ONLINE_URLS[loc.id]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="order-loc-redirect-btn"
+                >
+                  <MapPinIcon size={14} />
+                  <span>{loc.name.replace('Mokha Coffee House Ltd.', '').trim() || 'Castledowns'}</span>
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </div>
