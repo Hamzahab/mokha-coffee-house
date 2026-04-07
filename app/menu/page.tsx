@@ -141,13 +141,13 @@ export default function MenuPage() {
       {/* TABS + MENU BODY */}
       <TabsMenu tabs={tabs} />
 
-      {/* ORDER ONLINE — coming soon banner */}
-      <div style={{ background: 'var(--b2)', borderTop: '1px solid rgba(201,169,110,.1)', padding: '32px 56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' as const }}>
+      {/* ORDER ONLINE CTA */}
+      <div className="menu-order-banner">
         <div>
-          <p style={{ fontFamily: "var(--font-cinzel), 'Cinzel', serif", fontSize: 9, letterSpacing: '.42em', color: 'var(--gold)', marginBottom: 6 }}>Order Online</p>
-          <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: 22, fontStyle: 'italic', color: 'var(--cream)' }}>Square integration coming soon — order in-store or call ahead.</p>
+          <p className="menu-order-banner-title">Ready to order?</p>
+          <p className="menu-order-banner-desc">Browse the full menu, customize your drink, and pick up at your nearest location.</p>
         </div>
-        <Link className="btn-primary" href="/locations" style={{ flexShrink: 0 }}>Find a Location</Link>
+        <Link className="btn-primary" href="/order">Order for Pickup</Link>
       </div>
     </>
   );
