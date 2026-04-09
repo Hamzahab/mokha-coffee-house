@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import { Reveal } from '@/components/Reveal';
 import { ContactForm } from '@/components/ContactForm';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Mokha Coffee House — general inquiries, event bookings, press, wholesale partnerships, and more.',
+};
 
 const contactDetails = [
   { label: 'General', value: 'hello@mymokhacafe.com', href: 'mailto:hello@mymokhacafe.com' },

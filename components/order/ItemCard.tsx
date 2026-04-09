@@ -15,7 +15,9 @@ export function ItemCard({ item, onSelect }: ItemCardProps) {
   return (
     <button
       className={`order-item-card${isOutOfStock ? ' out-of-stock' : ''}`}
-      onClick={() => onSelect(item)}
+      onClick={() => !isOutOfStock && onSelect(item)}
+      disabled={isOutOfStock}
+      aria-disabled={isOutOfStock}
     >
       <div className="order-item-info">
         <p className="order-item-name">{item.name}</p>

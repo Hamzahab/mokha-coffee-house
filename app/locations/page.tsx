@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
+
+export const metadata: Metadata = {
+  title: 'Locations',
+  description: 'Visit Mokha Coffee House at Castledowns or Currents Drive in Edmonton, Alberta. Hours, directions, and parking info for both locations.',
+};
 
 const locations = [
   {

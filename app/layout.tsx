@@ -29,8 +29,17 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Mokha Coffee House — Edmonton',
+  metadataBase: new URL('https://mokha-coffee-house.vercel.app'),
+  title: {
+    default: 'Mokha Coffee House — Edmonton',
+    template: '%s | Mokha Coffee House',
+  },
   description: 'Yemeni Coffee House in Edmonton, Alberta. Come as a stranger, leave as family.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Mokha Coffee House',
+    locale: 'en_CA',
+  },
   icons: {
     icon: [
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },

@@ -7,7 +7,6 @@ import type { StoreLocation } from '@/lib/square/types';
 import { CheckIcon, MapPinIcon } from '@/components/order/Icons';
 
 const STORAGE_KEY = 'mokha-cart';
-const LOCATION_STORAGE_KEY = 'mokha-last-location';
 
 function ConfirmationContent() {
   const searchParams = useSearchParams();

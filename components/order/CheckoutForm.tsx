@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useMemo } from 'react';
+import Link from 'next/link';
 import { useCart } from './CartProvider';
 import { useFormatCurrency } from './useFormatCurrency';
 import { AlertIcon } from './Icons';
@@ -154,6 +155,11 @@ export function CheckoutForm({ state, dispatch }: CheckoutFormProps) {
           <span>Subtotal</span>
           <span>{fmt(subtotalCents)}</span>
         </div>
+        <p className="order-checkout-consent">
+          By placing this order, you agree to our{' '}
+          <Link href="/terms" target="_blank">Terms</Link> and{' '}
+          <Link href="/privacy" target="_blank">Privacy Policy</Link>.
+        </p>
         <button
           className="order-cart-checkout-btn"
           onClick={handleCheckout}

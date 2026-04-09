@@ -74,13 +74,29 @@ export function buildTimeSlotsForDay(
   return slots;
 }
 
-export function isStoreOpenNow(periods: HoursPeriod[]): boolean {
+export function isStoreOpenNow(
+  periods: HoursPeriod[],
+  timezone = 'America/Edmonton',
+): boolean {
   const now = new Date();
-  const todayDay = SQUARE_DAYS[now.getDay()];
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  });
+  const parts = Object.fromEntries(
+    formatter.formatToParts(now).map((p) => [p.type, p.value]),
+  );
+  const dayMap: Record<string, string> = {
+    Sun: 'SUN', Mon: 'MON', Tue: 'TUE', Wed: 'WED', Thu: 'THU', Fri: 'FRI', Sat: 'SAT',
+  };
+  const todayDay = dayMap[parts.weekday] ?? SQUARE_DAYS[now.getDay()];
+  const currentMinutes = Number(parts.hour) * 60 + Number(parts.minute);
+
   const todayPeriods = periods.filter((p) => p.dayOfWeek === todayDay);
   if (todayPeriods.length === 0) return false;
-
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
   return todayPeriods.some((p) => {
     const [startH, startM] = p.startLocalTime.split(':').map(Number);

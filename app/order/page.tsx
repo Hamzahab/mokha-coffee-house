@@ -1,9 +1,16 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { fetchCatalog } from '@/lib/square/catalog';
 import { OrderClient } from '@/components/order/OrderClient';
 import { OrderErrorBoundary } from '@/components/order/OrderErrorBoundary';
 import { SkeletonGrid } from '@/components/order/SkeletonGrid';
 import { LocationGate } from '@/components/order/LocationGate';
+
+export const metadata: Metadata = {
+  title: 'Order for Pickup',
+  description: 'Browse the full Mokha menu, customize your drink, and order for pickup at your nearest Edmonton location.',
+  robots: { index: false },
+};
 
 export const revalidate = 60;
 

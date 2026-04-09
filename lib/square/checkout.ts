@@ -1,7 +1,15 @@
 import { getSquareClient } from './client';
 import type { OrderPayload } from './types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
+function getBaseUrl(): string {
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  if (!url) {
+    throw new Error(
+      'NEXT_PUBLIC_BASE_URL is not set. Add it to your environment variables (e.g. https://mokha-coffee-house.vercel.app).',
+    );
+  }
+  return url;
+}
 
 /** Strip non-digits, prepend +1 if missing country code (Canadian/US default). */
 function toE164(phone: string): string {
@@ -47,7 +55,7 @@ export async function createCheckout(payload: OrderPayload) {
       ],
     },
     checkoutOptions: {
-      redirectUrl: `${BASE_URL}/order/confirmation`,
+      redirectUrl: `${getBaseUrl()}/order/confirmation`,
       allowTipping: true,
     },
   });

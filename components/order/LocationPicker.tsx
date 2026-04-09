@@ -61,9 +61,23 @@ export function LocationPicker({ onConfirm, immediate }: LocationPickerProps) {
   const [activeTab, setActiveTab] = useState<'pickup' | 'delivery' | 'shipping'>('pickup');
   const [distances, setDistances] = useState<Record<string, number>>({});
 
+  const handleConfirm = useCallback(() => {
+    const loc = LOCATIONS.find((l) => l.id === selected);
+    if (!loc) return;
+    setLocation(loc);
+    setSkipTransition(false);
+    setVisible(false);
+    setTimeout(onConfirm, 300);
+  }, [selected, setLocation, onConfirm]);
+
   useEffect(() => {
     if (!immediate) requestAnimationFrame(() => setVisible(true));
     document.body.style.overflow = 'hidden';
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleConfirm();
+    };
+    document.addEventListener('keydown', handleKey);
 
     let watchId: number | undefined;
     if ('geolocation' in navigator) {
@@ -82,18 +96,10 @@ export function LocationPicker({ onConfirm, immediate }: LocationPickerProps) {
 
     return () => {
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKey);
       if (watchId != null) navigator.geolocation.clearWatch(watchId);
     };
-  }, []);
-
-  const handleConfirm = useCallback(() => {
-    const loc = LOCATIONS.find((l) => l.id === selected);
-    if (!loc) return;
-    setLocation(loc);
-    setSkipTransition(false);
-    setVisible(false);
-    setTimeout(onConfirm, 300);
-  }, [selected, setLocation, onConfirm]);
+  }, [handleConfirm]);
 
   return (
     <div className={`order-loc-backdrop${visible ? ' visible' : ''}${skipTransition ? ' no-transition' : ''}`}>

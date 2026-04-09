@@ -944,6 +944,19 @@
   font-size: 16px;
   font-weight: 400;
 }
+.order-checkout-consent {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--cream-dim);
+  opacity: .6;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.order-checkout-consent a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .order-cart-checkout-btn {
   width: 100%;
   padding: 16px;

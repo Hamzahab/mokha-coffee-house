@@ -119,15 +119,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!state.location) return;
+    const controller = new AbortController();
     setHoursLoading(true);
     setHoursPeriods([]);
-    fetch(`/api/square/hours?locationId=${encodeURIComponent(state.location.id)}`)
+    fetch(`/api/square/hours?locationId=${encodeURIComponent(state.location.id)}`, {
+      signal: controller.signal,
+    })
       .then((r) => r.json())
       .then((data) => {
         if (data.periods) setHoursPeriods(data.periods);
       })
-      .catch(() => {})
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          console.error('[Hours fetch failed]', err);
+        }
+      })
       .finally(() => setHoursLoading(false));
+    return () => controller.abort();
   }, [state.location?.id]);
 
   const addItem = useCallback((item: CartItem) => {

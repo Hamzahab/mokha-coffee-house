@@ -18,20 +18,28 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
   const { location } = useCart();
   const [categories, setCategories] = useState(initialCategories);
   const [loading, setLoading] = useState(false);
+  const [catalogError, setCatalogError] = useState(false);
   const [selectedItem, setSelectedItem] = useState<CatalogMenuItem | null>(null);
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [toast, setToast] = useState(false);
 
   useEffect(() => {
     if (!location) return;
+    const controller = new AbortController();
     setLoading(true);
-    fetch(`/api/square/catalog?locationId=${encodeURIComponent(location.id)}`)
+    setCatalogError(false);
+    fetch(`/api/square/catalog?locationId=${encodeURIComponent(location.id)}`, {
+      signal: controller.signal,
+    })
       .then((r) => r.json())
       .then((data) => {
         if (data.categories) setCategories(data.categories);
       })
-      .catch(() => {})
+      .catch((err) => {
+        if (err.name !== 'AbortError') setCatalogError(true);
+      })
       .finally(() => setLoading(false));
+    return () => controller.abort();
   }, [location]);
 
   const handleItemAdded = useCallback(() => {
@@ -67,6 +75,10 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
       <div className="order-page-menu">
         {loading ? (
           <SkeletonGrid />
+        ) : catalogError ? (
+          <div className="order-empty-state">
+            <p>Could not load menu. Please refresh the page.</p>
+          </div>
         ) : (
           <ItemGrid categories={categories} onSelectItem={setSelectedItem} />
         )}

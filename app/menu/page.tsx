@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Reveal } from '@/components/Reveal';
@@ -5,6 +6,11 @@ import { fetchCatalog } from '@/lib/square/catalog';
 import { formatItemPriceFrom } from '@/lib/square/format';
 import { MENU_HIGHLIGHTS } from '@/lib/square/config';
 import type { CatalogMenuItem, CatalogCategory } from '@/lib/square/types';
+
+export const metadata: Metadata = {
+  title: 'Menu',
+  description: 'Explore our curated selection of single-origin coffee, traditional teas, house-made desserts, and retail bags. Order for pickup at any Mokha location.',
+};
 
 export const revalidate = 120;
 

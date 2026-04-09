@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal';
+
+export const metadata: Metadata = {
+  title: 'Our Roots',
+  description: 'The story behind Mokha Coffee House — from the ancient port city of Mocha to Edmonton, Alberta. A Yemeni family\'s hospitality, served in every cup.',
+};
 
 export default function AboutPage() {
   return (
