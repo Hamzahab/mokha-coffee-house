@@ -1435,68 +1435,142 @@ footer {
 }
 .menu-hero h1 em { font-style: italic; color: var(--gold); }
 .menu-hero-sub {
-  font-size: 13px;
-  letter-spacing: .08em;
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: .01em;
   color: var(--cream-dim);
-  margin-top: 20px;
+  margin-top: 24px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   position: relative; z-index: 1;
 }
 
-/* ── TABS ── */
-.tabs-bar {
-  background: var(--b3);
-  border-bottom: 1px solid rgba(201,169,110,.12);
-  padding: 0 56px;
-  display: flex;
-  gap: 0;
-  position: sticky;
-  top: 64px;
-  z-index: 100;
-}
-.tab-btn {
-  font-size: 10px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--cream-dim);
-  background: none;
-  border: none;
-  padding: 20px 28px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color .25s, border-color .25s;
-  position: relative;
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
-  font-weight: 300;
-}
-.tab-btn:hover { color: var(--gold); }
-.tab-btn.active {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
-}
-/* Reserve tab special */
-.tab-btn.reserve-tab {
-  color: var(--gold);
-  letter-spacing: .32em;
-}
-.tab-btn.reserve-tab::before {
-  content: '★ ';
-  font-size: 8px;
-  opacity: .7;
-}
-.tab-btn.reserve-tab.active { border-bottom-color: var(--gold); }
-
-/* ── MENU BODY ── */
-.menu-body {
+/* ── MENU SECTIONS (The Bridge layout) ── */
+.menu-sections {
   background: var(--b2);
-  padding: 72px 56px;
-  min-height: 70vh;
 }
-.menu-panel { display: none; }
-.menu-panel.active { display: block; }
+.menu-section {
+  padding: 80px 56px;
+  border-bottom: 1px solid rgba(201,169,110,.08);
+}
+.menu-section:last-child { border-bottom: none; }
 
-/* ── RESERVE PANEL HERO ── */
-.reserve-header {
+.menu-section-header {
+  margin-bottom: 48px;
+}
+.menu-section-heading {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+.menu-section-heading::after {
+  content: '';
+  display: block;
+  margin-top: 14px;
+  height: 1px;
+  width: 64px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+.menu-section-desc {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  margin-top: 8px;
+  max-width: 480px;
+}
+
+/* ── Highlight cards (live items from Square) ── */
+.menu-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 36px;
+}
+.menu-highlight-card {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.menu-highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+.menu-highlight-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.menu-highlight-img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--b3);
+  border-radius: 6px;
+}
+.menu-highlight-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+.menu-highlight-card:hover .menu-highlight-img {
+  transform: scale(1.06);
+}
+.menu-highlight-name {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-top: 16px;
+  line-height: 1.25;
+}
+.menu-highlight-price {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* ── Section CTA link ── */
+.menu-section-cta-wrap {
+  margin-top: 12px;
+}
+.menu-section-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: var(--gold);
+  text-decoration: none;
+  transition: gap .25s, opacity .25s;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+}
+.menu-section-cta:hover {
+  gap: 14px;
+  opacity: .85;
+}
+.menu-section-cta-arrow {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.menu-section-cta:hover .menu-section-cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ── RESERVE section ── */
+.menu-section-reserve {
   text-align: center;
+}
+.reserve-header {
   padding: 0 0 64px;
   border-bottom: 1px solid rgba(201,169,110,.15);
   margin-bottom: 64px;
@@ -1529,23 +1603,20 @@ footer {
   margin: 20px auto 0;
 }
 
-/* ── MENU GRID ── */
-.menu-grid {
+/* ── Reserve grid (editorial cards) ── */
+.menu-reserve-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2px;
   background: rgba(201,169,110,.08);
+  text-align: left;
 }
-.menu-grid.two-col { grid-template-columns: repeat(2, 1fr); }
-.menu-grid.three-col { grid-template-columns: repeat(3, 1fr); }
-
 .menu-card {
   background: var(--b3);
   padding: 44px 36px;
   position: relative;
   overflow: hidden;
   transition: background .35s;
-  cursor: none;
 }
 .menu-card:hover { background: var(--mid); }
 .menu-card::after {
@@ -1558,8 +1629,6 @@ footer {
   transition: transform .4s;
 }
 .menu-card:hover::after { transform: scaleX(1); }
-
-/* Reserve cards get a gold top border */
 .menu-card.reserve-card {
   border-top: 1px solid rgba(201,169,110,.3);
 }
@@ -1595,27 +1664,6 @@ footer {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 20px;
   color: var(--gold);
-}
-.card-add {
-  font-size: 8px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--cream-dim);
-  background: rgba(201,169,110,.1);
-  border: 1px solid rgba(201,169,110,.2);
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: background .25s, color .25s;
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
-}
-.card-add:hover { background: var(--gold); color: var(--b2); }
-.card-num {
-  position: absolute;
-  bottom: 28px; right: 28px;
-  font-family: var(--font-cinzel), 'Cinzel', serif;
-  font-size: 9px;
-  color: rgba(201,169,110,.18);
-  letter-spacing: .22em;
 }
 
 /* Reserve origin tag */
@@ -1814,12 +1862,29 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .menu-grid { grid-template-columns: 1fr 1fr; }
-  .menu-grid.two-col { grid-template-columns: 1fr; }
-  .tabs-bar { padding: 0 16px; overflow-x: auto; gap: 0; }
-  .menu-body { padding: 48px 20px; }
+  .menu-hero { padding: 80px 20px 48px; }
+  .menu-hero h1 { font-size: clamp(48px, 12vw, 72px); }
+  .menu-hero-sub { font-size: 13px; margin-top: 16px; }
+
+  .menu-section { padding: 40px 20px; }
+  .menu-section-header { margin-bottom: 28px; }
+  .menu-section-heading { font-size: 28px; }
+  .menu-section-desc { font-size: 13px; }
+
+  .menu-highlights-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .menu-highlight-name { font-size: 14px; padding: 8px 4px 2px; }
+  .menu-highlight-price { font-size: 12px; padding: 0 4px 8px; }
+
+  .menu-reserve-grid { grid-template-columns: 1fr; }
+  .reserve-header { padding: 0 0 36px; }
+  .reserve-title { font-size: 36px !important; }
+  .reserve-desc { font-size: 13px; }
+  .reserve-card { padding: 24px 20px !important; }
+
   .cart-drawer { width: 100%; }
-  .menu-hero { padding: 100px 24px 64px; }
 }
 
 

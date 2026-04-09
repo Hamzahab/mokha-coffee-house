@@ -56,13 +56,33 @@ export async function fetchCatalog(locationId?: string): Promise<CatalogCategory
       return normalized;
     });
 
-  const stockMap = await fetchInventoryCounts(client, trackedVariationIds, locationId);
+  const stockMap = await withTimeout(
+    fetchInventoryCounts(client, trackedVariationIds, locationId),
+    1200,
+    new Map<string, number>(),
+  );
   applyStockStatus(menuItems, stockMap, variationThresholds);
 
   const categories = groupByCategory(menuItems, categoryMap);
   const featured = buildFeaturedCategory(menuItems);
   if (featured) categories.unshift(featured);
   return categories;
+}
+
+async function withTimeout<T>(
+  promise: Promise<T>,
+  timeoutMs: number,
+  fallback: T,
+): Promise<T> {
+  let timer: ReturnType<typeof setTimeout>;
+  const timeoutPromise = new Promise<T>((resolve) => {
+    timer = setTimeout(() => resolve(fallback), timeoutMs);
+  });
+  try {
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    clearTimeout(timer!);
+  }
 }
 
 // ---------------------------------------------------------------------------

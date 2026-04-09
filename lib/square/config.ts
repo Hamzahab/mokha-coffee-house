@@ -28,3 +28,38 @@ export const CATEGORY_DISPLAY_ORDER: Record<string, number> = {
   'cake & pie': 4,
   'retail': 5,
 };
+
+// ---------------------------------------------------------------------------
+// /menu page — curated highlight sections (The Bridge layout).
+// Each section surfaces a few standout items from the live catalog alongside
+// editorial copy. Items matched case-insensitively by name; only items with
+// an image are shown. If fewer than the requested count have images, we
+// backfill from the listed Square categories.
+// ---------------------------------------------------------------------------
+
+export interface MenuHighlight {
+  key: string;
+  heading: string;
+  description: string;
+  itemNames: string[];
+  squareCategories: string[];
+}
+
+export const MENU_HIGHLIGHTS: MenuHighlight[] = [
+  {
+    key: 'coffee-tea',
+    heading: 'Coffee & Tea',
+    description:
+      'Single-origin espresso, signature lattes, and traditional brews.',
+    itemNames: ['Adani Tea', 'Spanish Latte', 'Hot Salted Caramel Macchiato'],
+    squareCategories: ['hot beverages', 'cold beverages'],
+  },
+  {
+    key: 'kitchen',
+    heading: 'Kitchen',
+    description:
+      'House-made desserts and seasonal plates, made to share.',
+    itemNames: ['Umm Ali', 'Caramel Milk Cake', 'Honeycomb'],
+    squareCategories: ['desserts  -  bakery  &   food', 'cake & pie'],
+  },
+];
