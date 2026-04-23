@@ -19,6 +19,13 @@ export function Footer() {
           YouTube
         </a>
       </div>
+      <div className="footer-links">
+        <Link href="/menu">Menu</Link>
+        <Link href="/beans">Beans</Link>
+        <Link href="/catering">Catering</Link>
+        <Link href="/locations">Locations</Link>
+        <Link href="/contact">Contact</Link>
+      </div>
       <div className="footer-legal">
         <Link href="/privacy">Privacy Policy</Link>
         <Link href="/terms">Terms of Service</Link>

@@ -3,6 +3,7 @@ import { Reveal } from '@/components/Reveal';
 import { BeanParallax } from '@/components/BeanParallax';
 import { LazyYouTube } from '@/components/LazyYouTube';
 
+
 export default function HomePage() {
   return (
     <>
@@ -118,6 +119,9 @@ export default function HomePage() {
           <div className="bean-caption-line" />
           <span className="bean-caption-text">Haraz Mountains · Yemen · Single Origin</span>
         </div>
+        <Link href="/beans" className="bean-break-link" aria-label="Explore our beans">
+          Explore Our Beans →
+        </Link>
         <BeanParallax />
       </div>
 

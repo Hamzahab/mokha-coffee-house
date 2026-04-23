@@ -1602,10 +1602,7 @@
 }
 
 
-/* ── Inline style replacements ── */
-.order-stock-badge-mb {
-  margin-bottom: 12px;
-}
+/* ── Delivery/Shipping redirect ── */
 .order-loc-redirect {
   padding: 32px 20px 20px;
   text-align: center;
@@ -1615,13 +1612,14 @@
   font-size: 20px;
   font-weight: 500;
   color: var(--cream);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .order-loc-redirect-desc {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--cream-dim);
-  line-height: 1.5;
+  line-height: 1.6;
   margin-bottom: 24px;
+  text-align: left;
 }
 .order-loc-redirect-links {
   display: flex;
@@ -1645,6 +1643,11 @@
 }
 .order-loc-redirect-btn:hover {
   opacity: 0.9;
+}
+
+/* ── Inline style replacements ── */
+.order-stock-badge-mb {
+  margin-bottom: 12px;
 }
 
 /* ── Micro-interactions ── */
@@ -1711,6 +1714,16 @@
 .skeleton-section-heading {
   height: 22px;
   margin: 20px 20px 10px;
+}
+
+.order-loc-redirect-trust {
+  font-size: 11px;
+  color: var(--cream-dim);
+  opacity: .5;
+  margin-top: 20px;
+  text-align: center;
+  letter-spacing: .02em;
+  line-height: 1.6;
 }
 
 /* ── Error boundary ── */

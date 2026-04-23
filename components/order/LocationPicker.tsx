@@ -48,6 +48,10 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+function locationLabel(name: string): string {
+  return name.replace('Mokha Coffee House Ltd.', '').trim() || 'Castledowns';
+}
+
 interface LocationPickerProps {
   onConfirm: () => void;
   immediate?: boolean;
@@ -164,13 +168,13 @@ export function LocationPicker({ onConfirm, immediate }: LocationPickerProps) {
           </>
         ) : (
           <div className="order-loc-redirect">
-            <p className="order-loc-redirect-title">
-              {activeTab === 'delivery' ? 'Delivery' : 'Shipping'} is available through our partner checkout
-            </p>
+            <h2 className="order-loc-redirect-title">
+              {activeTab === 'delivery' ? 'Order for delivery' : 'Ship beans & retail'}
+            </h2>
             <p className="order-loc-redirect-desc">
               {activeTab === 'delivery'
-                ? 'Get your order delivered to your door via our Square Online store.'
-                : 'Have items shipped to you via our Square Online store.'}
+                ? 'Delivery is powered by our partners through Square. Choose your location below — you\'ll be able to browse the full menu, enter your address, and get a delivery estimate.'
+                : 'Shipping is handled through our Square store. Select a location to browse beans, retail items, and have them shipped to your door.'}
             </p>
             <div className="order-loc-redirect-links">
               {LOCATIONS.map((loc) => (
@@ -182,10 +186,20 @@ export function LocationPicker({ onConfirm, immediate }: LocationPickerProps) {
                   className="order-loc-redirect-btn"
                 >
                   <MapPinIcon size={14} />
-                  <span>{loc.name.replace('Mokha Coffee House Ltd.', '').trim() || 'Castledowns'}</span>
+                  <span>
+                    {locationLabel(loc.name)}
+                    {distances[loc.id] != null && (
+                      <> &middot; {distances[loc.id] < 1
+                        ? `${Math.round(distances[loc.id] * 1000)} m`
+                        : `${distances[loc.id].toFixed(1)} km`}</>
+                    )}
+                  </span>
                 </a>
               ))}
             </div>
+            <p className="order-loc-redirect-trust">
+              Secure checkout &middot; Delivery fees calculated at checkout &middot; Powered by Square
+            </p>
           </div>
         )}
       </div>

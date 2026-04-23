@@ -1,6 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import type { CatalogCategory, CatalogMenuItem } from '@/lib/square/types';
 import { useCart } from './CartProvider';
 import { LocationPicker } from './LocationPicker';
@@ -41,6 +42,29 @@ export function OrderClient({ categories: initialCategories }: OrderClientProps)
       .finally(() => setLoading(false));
     return () => controller.abort();
   }, [location]);
+
+  const searchParams = useSearchParams();
+  const scrolledRef = useRef(false);
+
+  useEffect(() => {
+    if (scrolledRef.current || loading) return;
+    const target = searchParams.get('category');
+    if (!target) return;
+
+    const match = categories.find(
+      (c) => c.name.toLowerCase() === target.toLowerCase(),
+    );
+    if (!match) return;
+
+    scrolledRef.current = true;
+    requestAnimationFrame(() => {
+      const el = document.getElementById(match.id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 130;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  }, [categories, loading, searchParams]);
 
   const handleItemAdded = useCallback(() => {
     setToast(true);

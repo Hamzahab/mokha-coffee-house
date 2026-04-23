@@ -2327,3 +2327,341 @@ footer {
   .contact-hero { padding: 100px 24px 64px; }
   .social-row { flex-wrap: wrap; }
 }
+
+
+/* ===== catering page ===== */
+
+
+/* ── CATERING HERO ── */
+.catering-hero {
+  background: var(--b2);
+  padding: 120px 56px 80px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.catering-hero-orb {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(98,114,101,.2), transparent 70%);
+  filter: blur(110px);
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.catering-hero h1 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 300;
+  line-height: .95;
+  color: var(--cream);
+  position: relative; z-index: 1;
+}
+.catering-hero h1 em { font-style: italic; color: var(--gold); }
+.catering-hero-sub {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  max-width: 520px;
+  margin: 24px auto 0;
+  position: relative; z-index: 1;
+}
+
+/* ── BODY (intro + service list) ── */
+.catering-body {
+  background: var(--w);
+  padding: 100px 56px;
+}
+.catering-body-inner {
+  max-width: 680px;
+}
+.catering-services {
+  margin-top: 48px;
+}
+.catering-service {
+  display: flex;
+  gap: 40px;
+  align-items: baseline;
+  padding: 28px 0;
+  border-top: 1px solid rgba(44,36,25,.08);
+}
+.catering-service:last-child {
+  border-bottom: 1px solid rgba(44,36,25,.08);
+}
+.catering-service-label {
+  font-size: 8px;
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--gold3);
+  flex-shrink: 0;
+  width: 140px;
+}
+.catering-service-text {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--g);
+}
+
+/* ── PROCESS (how it works) ── */
+.catering-process-inner {
+  padding: 100px 56px;
+  border-top: 1px solid rgba(201,169,110,.08);
+}
+.catering-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+  margin-top: 56px;
+}
+.catering-process-step {
+  text-align: center;
+}
+.catering-process-num {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.catering-process-rule {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 18px auto;
+}
+.catering-process-title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.catering-process-body {
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--cream-dim);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* ── INQUIRY FORM SECTION ── */
+.catering-inquiry {
+  background: var(--w);
+  padding: 100px 56px;
+}
+.catering-inquiry-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.catering-inquiry-direct {
+  font-size: 13px;
+  color: var(--g);
+  margin-top: 8px;
+}
+.catering-inquiry-direct a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity .25s;
+}
+.catering-inquiry-direct a:hover { opacity: .75; }
+.catering-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── CATERING RESPONSIVE ── */
+@media (max-width: 900px) {
+  .catering-hero { padding: 100px 24px 64px; }
+  .catering-hero h1 { font-size: clamp(40px, 10vw, 72px); }
+  .catering-hero-sub { font-size: 13px; }
+  .catering-body { padding: 64px 24px; }
+  .catering-service { flex-direction: column; gap: 8px; }
+  .catering-service-label { width: auto; }
+  .catering-process-inner { padding: 64px 24px; }
+  .catering-process-grid { grid-template-columns: 1fr; gap: 40px; }
+  .catering-inquiry { padding: 64px 24px; }
+  .catering-inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
+  .catering-form-row { grid-template-columns: 1fr; }
+}
+
+
+/* ===== beans page ===== */
+
+
+/* ── BEANS HERO ── */
+.beans-hero {
+  background: var(--b2);
+  padding: 120px 56px 80px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.beans-hero-orb {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140,85,30,.22), transparent 70%);
+  filter: blur(100px);
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.beans-hero h1 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 9vw, 120px);
+  font-weight: 300;
+  line-height: .92;
+  color: var(--cream);
+  position: relative; z-index: 1;
+}
+.beans-hero h1 em { font-style: italic; color: var(--gold); }
+.beans-hero-sub {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--cream-dim);
+  max-width: 500px;
+  margin: 24px auto 0;
+  position: relative; z-index: 1;
+}
+
+/* ── PHILOSOPHY ── */
+.beans-philosophy {
+  background: var(--w);
+  padding: 100px 56px;
+}
+.beans-philosophy-inner {
+  max-width: 640px;
+}
+
+/* ── RESERVE SECTION (reuses menu reserve styles) ── */
+.beans-reserve-inner {
+  padding: 80px 56px;
+  border-top: 1px solid rgba(201,169,110,.08);
+}
+
+/* ── RETAIL GRID ── */
+.beans-retail {
+  padding: 80px 56px;
+  border-top: 1px solid rgba(201,169,110,.08);
+}
+.beans-retail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+.beans-retail-card {
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+}
+.beans-retail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+.beans-retail-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.beans-retail-img-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--b3);
+  border-radius: 6px;
+}
+.beans-retail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+.beans-retail-card:hover .beans-retail-img {
+  transform: scale(1.06);
+}
+.beans-retail-name {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-top: 16px;
+  line-height: 1.25;
+}
+.beans-retail-desc {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--cream-dim);
+  margin-top: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.beans-retail-price {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* ── BEANS RESPONSIVE ── */
+@media (max-width: 900px) {
+  .beans-hero { padding: 80px 20px 48px; }
+  .beans-hero h1 { font-size: clamp(48px, 12vw, 72px); }
+  .beans-hero-sub { font-size: 13px; margin-top: 16px; }
+  .beans-philosophy { padding: 64px 24px; }
+  .beans-reserve-inner { padding: 48px 20px; }
+  .beans-retail { padding: 48px 20px; }
+  .beans-retail-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .beans-retail-name { font-size: 16px; }
+}
+
+
+/* ===== bean break link on home page ===== */
+
+.bean-break-link {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity .3s;
+  opacity: .7;
+}
+.bean-break-link:hover { opacity: 1; }
+
+
+/* ===== footer site links ===== */
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  grid-column: 1 / -1;
+}
+.footer-links a {
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  text-decoration: none;
+  transition: color .3s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+@media (max-width: 900px) {
+  .footer-links { flex-wrap: wrap; gap: 16px; }
+}
+
+

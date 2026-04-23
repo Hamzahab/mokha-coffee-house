@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/menu', label: 'Menu' },
+  { href: '/beans', label: 'Beans' },
+  { href: '/catering', label: 'Catering' },
   { href: '/about', label: 'Our Roots' },
   { href: '/locations', label: 'Locations' },
   { href: '/contact', label: 'Contact' },
@@ -39,7 +41,7 @@ export function Nav() {
         <div className="nav-left">
           <Link href="/" className={pathname === '/' ? 'active' : ''}>Home</Link>
           <Link href="/menu" className={pathname === '/menu' ? 'active' : ''}>Menu</Link>
-          <Link href="/about" className={pathname === '/about' ? 'active' : ''}>Our Roots</Link>
+          <Link href="/beans" className={pathname === '/beans' ? 'active' : ''}>Beans</Link>
         </div>
 
         <Link href="/" className="nav-logo" aria-label="Mokha Coffee House home">
@@ -48,6 +50,7 @@ export function Nav() {
         </Link>
 
         <div className="nav-right">
+          <Link href="/catering" className={pathname === '/catering' ? 'active' : ''}>Catering</Link>
           <Link href="/locations" className={pathname === '/locations' ? 'active' : ''}>Locations</Link>
           <Link href="/contact" className={pathname === '/contact' ? 'active' : ''}>Contact</Link>
           <Link href="/order" className="nav-cta">Order Now</Link>
@@ -83,7 +86,7 @@ export function Nav() {
           <Link
             href="/order"
             className="mobile-menu-cta"
-            style={{ animationDelay: '0.4s' }}
+            style={{ animationDelay: '0.5s' }}
             onClick={() => setMenuOpen(false)}
           >
             Order Now
